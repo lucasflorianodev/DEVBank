@@ -7,6 +7,8 @@ import exceptions.SenhaInvalidaException;
 import java.util.Scanner;
 
 import static origem.Pagamento.realizarPagamento;
+import static origem.Transferencia.realizarTransferencia;
+import static origem.Pix.*;
 
 public class Banco {
     public static void main(String[] args) {
