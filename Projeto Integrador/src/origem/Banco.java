@@ -60,6 +60,7 @@ public class Banco {
             System.out.println("3 - Transferências");
             System.out.println("4 - Pagamentos");
             System.out.println("5 - Investimentos");
+            System.out.println("6 - Pix");
             System.out.println("0 - Encerrar sessão e Desconectar");
             System.out.print("Opção: ");
 
@@ -95,6 +96,36 @@ public class Banco {
 
                 case 5:
                     System.out.println("Você escolheu a opção de investimentos.");
+                    break;
+                    
+                case 6:
+                    System.out.println("Você escolheu a opção Pix.");
+                    System.out.println("Selecione o tipo de operação PIX:");
+                    System.out.println("1 - Realizar pagamento PIX");
+                    System.out.println("2 - Fazer cobrança PIX");
+                    System.out.println("0 - Voltar para o menu principal");
+                    System.out.print("Opção: ");
+
+                    int pixOpcao = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (pixOpcao) {
+                        case 1:
+                            System.out.println("Você escolheu a opção de realizar um pagamento PIX.");
+                            realizarPagamentoPix();
+                            break;
+                        case 2:
+                            System.out.println("Você escolheu a opção de realizar uma cobrança PIX.");
+                            realizarCobrancaPix();
+                            break;
+                        case 0:
+                            System.out.println("Você escolheu voltar para o menu principal.");
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                            break;
+                    }
+
                     break;
 
                 case 0:
