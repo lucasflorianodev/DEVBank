@@ -1,4 +1,4 @@
-# DevBank - Banco Digital
+# DevBank - Banco Digital (Projeto em Andamento)
 
 Bem-vindo ao repositório do projeto DevBank!
 
