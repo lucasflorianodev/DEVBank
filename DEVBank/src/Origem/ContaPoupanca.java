@@ -105,21 +105,15 @@ public class ContaPoupanca {
     private static void transferirParaContaCorrente() {
         System.out.println("Digite o valor a ser transferido para a conta corrente:");
 
-        double valor;
         try {
-            valor = scanner.nextDouble();
+            double valor = scanner.nextDouble();
             scanner.nextLine();
-        } catch (InputMismatchException e) {
-            System.out.println("Valor inválido, digite um valor numérico.");
-            scanner.nextLine(); // Console a entrada inválida
-            transferirParaContaCorrente(); // Chama o método novamente para tentar novamente
-            return;
-        }
 
-        if (valor <= 0) {
-            System.out.println("Valor inválido, o valor a ser transferido deve ser maior que zero.");
-            return;
-        }
+            if (valor <= 0) {
+                System.out.println("Valor inválido, o valor a ser depositado deve ser maior que zero.");
+                return;
+            }
+
 
         if (valor > saldopoupanca) {
             System.out.println("Transferência não autorizada - Saldo insuficiente");
@@ -137,6 +131,13 @@ public class ContaPoupanca {
             extratopoupanca.add(registro);
             extratocorrente.add(registro);
             System.out.printf("Transferência autorizada com Sucesso\n%s\n", registro);
+        }
+
+        } catch (InputMismatchException e) {
+            System.out.println("Valor inválido, digite um valor numérico.");
+            scanner.nextLine();
+            transferirParaContaCorrente();
+            return;
         }
 
         System.out.print("Deseja efetuar outra Transferência? (S/N): ");

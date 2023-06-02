@@ -89,24 +89,39 @@ public class ContaCorrente {
 
     public static void transferirParaContaPoupanca() {
         System.out.println("Digite o valor a ser transferido para a conta poupança:");
-        double valor = scanner.nextDouble();
-        scanner.nextLine();
 
-        if (valor > saldocorrente) {
-            System.out.println("Transferência não autorizada - Saldo insuficiente");
-        } else {
-            saldocorrente -= valor;
-            ContaPoupanca.saldopoupanca += valor;
+        try {
+            double valor = scanner.nextDouble();
+            scanner.nextLine();
 
-            LocalDateTime dataHora = LocalDateTime.now();
-            String registro = String.format("%02d:%02d:%02d - %02d/%02d/%04d | Transferência para Conta Poupança | Valor = R$ %.2f",
-                    dataHora.getHour(), dataHora.getMinute(), dataHora.getSecond(),
-                    dataHora.getDayOfMonth(), dataHora.getMonthValue(), dataHora.getYear(),
-                    valor);
-            extratocorrente.add(registro);
-            extratopoupanca.add(registro);
+            if (valor <= 0) {
+                System.out.println("Valor inválido, o valor a ser depositado deve ser maior que zero.");
+                return;
+            }
 
-            System.out.printf("Transferência autorizada com Sucesso\n%s\n", registro);
+            if (valor > saldocorrente) {
+                System.out.println("Transferência não autorizada - Saldo insuficiente");
+                return;
+
+            } else {
+                saldocorrente -= valor;
+                ContaPoupanca.saldopoupanca += valor;
+
+                LocalDateTime dataHora = LocalDateTime.now();
+                String registro = String.format("%02d:%02d:%02d - %02d/%02d/%04d | Transferência para Conta Poupança | Valor = R$ %.2f",
+                        dataHora.getHour(), dataHora.getMinute(), dataHora.getSecond(),
+                        dataHora.getDayOfMonth(), dataHora.getMonthValue(), dataHora.getYear(),
+                        valor);
+                extratocorrente.add(registro);
+                extratopoupanca.add(registro);
+                System.out.printf("Transferência autorizada com Sucesso\n%s\n", registro);
+            }
+
+        } catch (InputMismatchException e) {
+            System.out.println("Valor inválido, digite um valor numérico.");
+            scanner.nextLine(); // Consome a entrada inválida
+            transferirParaContaPoupanca(); // Chama o método novamente para tentar novamente
+            return;
         }
 
         System.out.print("Deseja efetuar outra Transferência? (S/N): ");
@@ -122,6 +137,7 @@ public class ContaCorrente {
             transferirParaContaPoupanca();
         }
     }
+
     private static void dev24HCorrente() {
         boolean sair = false;
         while (!sair) {
@@ -174,11 +190,11 @@ public class ContaCorrente {
         saldocorrente += valor;
 
         LocalDateTime dataHora = LocalDateTime.now();
-        String registro = String.format("%02d:%02d:%02d - %02d/%02d/%04d | Depósito na Conta Poupança | Valor = R$ %.2f",
+        String registro = String.format("%02d:%02d:%02d - %02d/%02d/%04d | Depósito na Conta Corrente | Valor = R$ %.2f",
                 dataHora.getHour(), dataHora.getMinute(), dataHora.getSecond(),
                 dataHora.getDayOfMonth(), dataHora.getMonthValue(), dataHora.getYear(),
                 valor);
-        extratopoupanca.add(registro);
+        extratocorrente.add(registro);
         System.out.printf("Depósito realizado com sucesso.\n%s\n", registro);
     }
 
@@ -213,7 +229,7 @@ public class ContaCorrente {
                 dataHora.getHour(), dataHora.getMinute(), dataHora.getSecond(),
                 dataHora.getDayOfMonth(), dataHora.getMonthValue(), dataHora.getYear(),
                 valor);
-        extratopoupanca.add(registro);
+        extratocorrente.add(registro);
         System.out.printf("Saque realizado com sucesso.\n%s\n", registro);
     }
 }
