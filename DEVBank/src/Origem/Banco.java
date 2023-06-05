@@ -6,22 +6,17 @@ import exceptions.SenhaInvalidaException;
 
 import java.util.Scanner;
 
-import static Origem.Pix.realizarCobrancaPix;
-import static Origem.Pix.realizarPagamentoPix;
-import static Origem.Transferencia.realizarTransferencia;
-
 public class Banco {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        System.out.println("\n===============================");
+        System.out.println("DEVBANK");
+        System.out.println("===============================");
         System.out.println("Bem-vindo ao DevBank");
-        ClienteContaDigital ClienteContaDigital = null;
-        ContaCorrente contaCorrente = null;
-        ContaPoupanca contaPoupanca = null;
 
         int opcao = 0;
         while (opcao != 1 && opcao != 2) {
-            System.out.println("Por favor, selecione uma opção:");
+            System.out.println("\nPor favor, selecione uma opção:");
             System.out.println("1 - Abra sua conta agora");
             System.out.println("2 - Acesse sua conta");
             System.out.print("Opção: ");
@@ -35,14 +30,16 @@ public class Banco {
                     acessarConta();
                 } else {
                     System.out.println("Opção inválida. Por favor, tente novamente.");
+                    System.out.print("Opção: ");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Opção inválida. Por favor, tente novamente.");
+                System.out.print("Opção: ");
             }
         }
     }
 
-    public static ClienteContaDigital acessarConta() {
+    public static void acessarConta() {
         Scanner scanner = new Scanner(System.in);
 
         ClienteContaDigital ClienteContaDigital = null;
@@ -76,9 +73,6 @@ public class Banco {
         System.out.println("\nVerificando suas credenciais");
         System.out.println("Verificação concluída com Sucesso. Acessando sua conta");
 
-        System.out.println("\nOlá, " + ClienteContaDigital.getApelido() + ". Seu saldo atual em sua Conta Corrente é de " + ClienteContaDigital.getSaldoContaCorrenteFormatado());
-
-
         while (true) {
 
             System.out.println("\n===============================");
@@ -94,7 +88,7 @@ public class Banco {
             System.out.println("7 - Cartões");
             System.out.println("8 - Investimentos");
             System.out.println("9 - DevEconomy");
-            System.out.println("10 - Informes de Rendimento");
+            System.out.println("10 - Informe de Rendimentos");
             System.out.println("0 - Encerrar sessão e Desconectar");
             System.out.print("Opção: ");
 
@@ -118,37 +112,19 @@ public class Banco {
                 }
                 case 3 -> {
                     System.out.println("Você escolheu a opção Transferências.");
-                    realizarTransferencia();
+                    Transferencias.exibirOpcoesTransferencias();
                 }
                 case 4 -> {
                     System.out.println("Você escolheu a opção Pix.");
-                    System.out.println("Selecione o tipo de operação PIX:");
-                    System.out.println("1 - Pagamento");
-                    System.out.println("2 - Cobrança");
-                    System.out.println("0 - Voltar para o menu principal");
-                    System.out.print("Opção: ");
-                    int pixOpcao = scanner.nextInt();
-                    scanner.nextLine();
-                    switch (pixOpcao) {
-                        case 1 -> {
-                            System.out.println("Você escolheu a opção de realizar um pagamento PIX.");
-                            realizarPagamentoPix();
-                        }
-                        case 2 -> {
-                            System.out.println("Você escolheu a opção de realizar uma cobrança PIX.");
-                            realizarCobrancaPix();
-                        }
-                        case 0 -> System.out.println("Você escolheu voltar para o menu principal.");
-                        default -> System.out.println("Opção inválida.");
-                    }
+                    Pix.exibirOpcoesPix();
                 }
                 case 5 -> {
                     System.out.println("Você escolheu a opção Pagamentos.");
-                    Pagamento.exibirOpcoesPagamento();
+                    Pagamentos.exibirOpcoesPagamentos();
                 }
                 case 6 -> {
                     System.out.println("Você escolheu a opção Depósito.");
-                    Investimentos.exibirOpcoesInvestimentos();
+                    Deposito.exibirOpcoesDeposito();
                 }
                 case 7 -> {
                     System.out.println("Você escolheu a opção Cartões.");
@@ -164,7 +140,7 @@ public class Banco {
                 }
                 case 10 -> {
                     System.out.println("Você escolheu a opção Informes de Rendimento.");
-                    InformesRendimento.exibirOpcoesInformesRendimento();
+                        InformesRendimento.exibirOpcoesInformeRendimentos();
                 }
                 case 0 -> {
                     System.out.println("Você escolheu a opção de Encerrar sessão e Desconectar.");

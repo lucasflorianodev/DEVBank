@@ -68,13 +68,6 @@ public class AberturaContaDigital {
         System.out.print("Digite sua ocupação profissional:");
         String ocupacaoProfissional = scanner.nextLine();
 
-        // solicita a renda mensal e valida que somente números foram digitados
-        System.out.print("Digite sua renda mensal:");
-        String rendaMensal = scanner.nextLine();
-        while (!rendaMensal.matches("^\\d+$")) {
-            System.out.print("Por favor, digite somente números: ");
-            rendaMensal = scanner.nextLine();
-        }
 
         // Imprime as informações fornecidas pelo cliente
         System.out.println("Resumo das informações:");
@@ -86,7 +79,6 @@ public class AberturaContaDigital {
         System.out.println("Telefone ou celular: " + telefoneCelular);
         System.out.println("E-mail: " + email);
         System.out.println("Ocupação profissional: " + ocupacaoProfissional);
-        System.out.println("Renda mensal: " + rendaMensal);
 
         // Pergunta se o cliente deseja salvar as alterações
         System.out.println("\nDeseja alterar as informações? (S/N):");
@@ -108,7 +100,6 @@ public class AberturaContaDigital {
             System.out.println("6 - Telefone ou celular");
             System.out.println("7 - E-mail");
             System.out.println("8 - Ocupação profissional");
-            System.out.println("9 - Renda mensal");
             System.out.println("0 - Sair");
 
             int opcao = scanner.nextInt();
@@ -155,14 +146,6 @@ public class AberturaContaDigital {
                     System.out.print("Digite sua ocupação profissional:");
                     ocupacaoProfissional = scanner.nextLine();
                 }
-                case 9 -> {
-                    System.out.print("Digite sua renda mensal:");
-                    rendaMensal = scanner.nextLine();
-                    while (!rendaMensal.matches("^\\d+$")) {
-                        System.out.print("Por favor, digite somente números: ");
-                        rendaMensal = scanner.nextLine();
-                    }
-                }
                 case 0 -> System.out.println("Alterações salvas com sucesso!");
                 default -> System.out.println("Opção inválida, tente novamente.");
             }
@@ -178,7 +161,6 @@ public class AberturaContaDigital {
                 case 6 -> System.out.println("Telefone ou celular: " + telefoneCelular);
                 case 7 -> System.out.println("E-mail: " + email);
                 case 8 -> System.out.println("Ocupação profissional: " + ocupacaoProfissional);
-                case 9 -> System.out.println("Renda mensal: " + rendaMensal);
             }
 
             // Pergunta se o cliente deseja fazer mais alterações
@@ -215,23 +197,6 @@ public class AberturaContaDigital {
         System.out.print("Crie uma senha com 6 dígitos: ");
         String senha = scanner.nextLine();
 
-        // Verifica o tipo de cartão e limite de crédito conforme a renda mensal.
-        String tipoCartao;
-        int limiteCredito;
-
-        if (Integer.parseInt(rendaMensal) <= 1199) {
-            tipoCartao = "CLASSIC CARD";
-            limiteCredito = 1000;
-        } else if (Integer.parseInt(rendaMensal) <= 2999) {
-            tipoCartao = "OCEAN CARD";
-            limiteCredito = 3000;
-        } else if (Integer.parseInt(rendaMensal) <= 7999) {
-            tipoCartao = "SAPPHIRE CARD";
-            limiteCredito = 5000;
-        } else {
-            tipoCartao = "BLACK CARD";
-            limiteCredito = 10000;
-        }
         System.out.println("\n========================================");
         System.out.println("Dados da sua conta:");
         System.out.println("========================================");
@@ -241,8 +206,6 @@ public class AberturaContaDigital {
         System.out.println("Telefone: " + telefoneCelular);
         System.out.println("Numero da Conta: " + numeroConta);
         System.out.println("Senha: " + senha);
-        System.out.println("Tipo de Cartão: " + tipoCartao);
-        System.out.println("\nLimite de Crédito: " + limiteCredito);
         acessarConta();
     }
 
@@ -258,18 +221,19 @@ public class AberturaContaDigital {
     public static void exibirTermosCondicoes() {
         System.out.println("Termos e Condições do DevBank");
         System.out.println("==============================");
-        System.out.println("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-        System.out.println("Praesent vitae magna sed nunc maximus lacinia. Integer.");
-        System.out.println("Sed ullamcorper leo sed tortor congue, vitae tempus justo.");
-        System.out.println("Nulla facilisi. Duis nec mi et ante consequat iaculis at et ex.");
-        System.out.println("Sed lobortis ipsum non malesuada volutpat.");
-        System.out.println("Pellentesque fermentum ligula vitae venenatis vestibulum.");
-        System.out.println("Quisque a enim ut quam feugiat volutpat.");
-        System.out.println("Suspendisse potenti. Vestibulum at neque nec nunc facilisis finibus id nec mi.");
-        System.out.println("Praesent ut facilisis ex. Nulla malesuada neque ut orci congue, et fermentum turpis auctor.");
-        System.out.println("Fusce pharetra fermentum leo ut dapibus. In hac habitasse platea dictumst.");
-        System.out.println("Sed mattis magna quis massa sollicitudin, eget bibendum ipsum fringilla.");
-        System.out.println("Quisque non libero rutrum, condimentum dui ac, placerat odio.");
+        System.out.println("1. Uso dos Serviços:\\n\"");
+        System.out.println("   Ao utilizar os serviços do DevBank, você concorda em cumprir estes termos e condições.\\n\\n");
+        System.out.println("2. Responsabilidade:\\n\"");
+        System.out.println("   O DevBank não se responsabiliza por qualquer perda financeira ou dano causado pelo uso dos serviços.\\n\\n");
+        System.out.println("3. Privacidade:\n");
+        System.out.println("   O DevBank respeita sua privacidade e protege suas informações pessoais de acordo com a legislação aplicável.\n\n");
+        System.out.println("4. Segurança:\n");
+        System.out.println("   O DevBank implementa medidas de segurança para proteger suas informações, mas não garante a segurança absoluta.\n\n");
+        System.out.println("5. Direitos Autorais:\n");
+        System.out.println("   Todo o conteúdo do DevBank, incluindo textos, imagens e logotipos, é protegido por direitos autorais.\n\n");
+        System.out.println("6. Modificações:\n");
+        System.out.println("   O DevBank reserva o direito de modificar estes termos e condições a qualquer momento, sem aviso prévio.\n\n");
+        System.out.println("Ao utilizar os serviços do DevBank, você concorda com estes termos e condições. Se você não concorda, não utilize os serviços.");
         System.out.println("===================================");
     }
 }
