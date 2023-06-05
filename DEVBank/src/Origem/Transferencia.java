@@ -1,4 +1,4 @@
-package origem;
+package Origem;
 
 import java.util.Scanner;
 
